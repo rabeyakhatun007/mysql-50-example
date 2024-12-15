@@ -1,0 +1,288 @@
+Example: 1
+SELECT * FROM Customers;
+
+
+Example: 2
+SELECT CustomerName, City, Country FROM Customers;
+
+
+
+Example: 3
+SELECT * FROM Customers
+WHERE Country='Mexico';
+
+
+
+Example: 4
+SELECT * FROM Customers
+WHERE CustomerID=1;
+
+
+
+Example: 5
+SELECT * FROM Customers
+WHERE Country = 'Germany' AND City = 'Berlin';
+
+
+Example: 6
+SELECT * FROM Customers
+WHERE City = 'Berlin' OR City = 'Stuttgart';
+
+
+
+Example: 7
+SELECT * FROM Customers
+WHERE Country = 'Germany' OR Country = 'Spain';
+
+
+Example: 8
+SELECT * FROM Customers
+WHERE Country = 'Germany' AND (City = 'Berlin' OR City = 'Stuttgart');
+
+
+
+Example: 9
+SELECT * FROM Customers
+WHERE NOT Country = 'Germany' AND NOT Country = 'USA';
+
+
+
+Example: 10
+SELECT CustomerName, ContactName, Address
+FROM Customers
+WHERE Address IS NULL;
+
+
+
+
+Example: 11
+SELECT CustomerName, ContactName, Address
+FROM Customers
+WHERE Address IS NOT NULL;
+
+
+
+Example: 12
+SELECT * FROM Customers
+LIMIT 3;
+
+
+
+Example: 13
+SELECT * FROM Customers
+LIMIT 3 OFFSET 3;
+
+
+
+Example: 14
+SELECT * FROM Customers
+WHERE Country='Germany'
+LIMIT 3;
+
+
+Example: 15
+SELECT MIN(Price) AS SmallestPrice
+FROM Products;
+
+
+Example: 16
+SELECT MAX(Price) AS LargestPrice
+FROM Products;
+
+
+Example: 17
+SELECT COUNT(ProductID)
+FROM Products;
+
+
+Example: 18
+SELECT AVG(Price)
+FROM Products;
+
+
+
+Example: 19
+SELECT * FROM Customers
+WHERE CustomerName LIKE 'a%';
+
+
+Example: 20
+SELECT * FROM Customers
+WHERE CustomerName LIKE '%a';
+
+
+Example: 21
+SELECT * FROM Customers
+WHERE CustomerName LIKE '%or%';
+
+
+Example: 22
+SELECT * FROM Customers
+WHERE CustomerName LIKE '_r%';
+
+
+Example: 23
+SELECT * FROM Customers
+WHERE CustomerName LIKE 'a__%';
+
+
+Example: 24
+SELECT * FROM Customers
+WHERE ContactName LIKE 'a%o';
+
+
+Example: 25
+SELECT * FROM Customers
+WHERE CustomerName NOT LIKE 'a%';
+
+
+Example: 26
+SELECT * FROM Customers
+WHERE Country IN ('Germany', 'France', 'UK');
+
+
+Example: 27
+SELECT * FROM Customers
+WHERE Country IN (SELECT Country FROM Suppliers);
+
+
+Example: 28
+SELECT * FROM Products
+WHERE Price BETWEEN 10 AND 20;
+
+
+Example: 29
+SELECT CustomerName AS Customer, ContactName AS "Contact Person"
+FROM Customers;
+
+
+Example: 30
+SELECT CustomerName, CONCAT_WS(', ', Address, PostalCode, City, Country) AS Address
+FROM Customers;
+
+
+Example: 31
+SELECT o.OrderID, o.OrderDate, c.CustomerName
+FROM Customers AS c, Orders AS o
+WHERE c.CustomerName='Around the Horn' AND c.CustomerID=o.CustomerID;
+
+
+Example: 32
+SELECT Orders.OrderID, Customers.CustomerName, Orders.OrderDate
+FROM Orders
+INNER JOIN Customers ON Orders.CustomerID=Customers.CustomerID;
+
+
+
+Example: 33
+SELECT Orders.OrderID, Customers.CustomerName, Shippers.ShipperName
+FROM ((Orders
+INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID)
+INNER JOIN Shippers ON Orders.ShipperID = Shippers.ShipperID);
+
+
+
+Example: 34
+SELECT OrderID, Quantity,
+CASE
+    WHEN Quantity > 30 THEN 'The quantity is greater than 30'
+    WHEN Quantity = 30 THEN 'The quantity is 30'
+    ELSE 'The quantity is under 30'
+END AS QuantityText
+FROM OrderDetails;
+
+
+
+Example: 35
+SELECT CustomerName, City, Country
+FROM Customers
+ORDER BY
+(CASE
+    WHEN City IS NULL THEN Country
+    ELSE City
+END);
+
+
+Example: 36
+-- Select all:
+SELECT * FROM Customers;
+
+
+Example: 37
+SELECT * FROM Customers -- WHERE City='Berlin';
+
+
+Example: 38
+SELECT * FROM Products
+WHERE Price > ALL (SELECT Price FROM Products WHERE Price > 500);
+
+
+Example: 39
+SELECT * FROM Customers
+WHERE City = "London" AND Country = "UK";
+
+
+Example: 40
+CREATE TABLE Persons (
+    PersonID int,
+    LastName varchar(255),
+    FirstName varchar(255),
+    Address varchar(255),
+    City varchar(255)
+);
+
+
+Example: 41
+TRUNCATE TABLE table_name;
+
+
+Example: 42
+ALTER TABLE table_name
+ADD column_name datatype;
+
+
+Example: 43
+ALTER TABLE Customers
+DROP COLUMN Email;
+
+
+Example: 44
+CREATE TABLE table_name (
+    column1 datatype constraint,
+    column2 datatype constraint,
+    column3 datatype constraint,
+    ....
+);
+
+
+Example: 45
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255) NOT NULL,
+    Age int
+);
+
+
+Example: 46
+SELECT * FROM Orders WHERE OrderDate='2008-11-11'
+
+
+Example: 47
+SELECT MIN(Price) AS SmallestPrice
+FROM Products;
+
+
+Example: 48
+SELECT MAX(Price) AS LargestPrice
+FROM Products; 
+
+
+Example: 49
+SELECT COUNT(ProductID)
+FROM Products;
+
+
+Example: 50
+SELECT SUM(Quantity)
+FROM OrderDetails;
